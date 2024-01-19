@@ -17,11 +17,13 @@ struct ContentView: View {
         // we're assuming inputs will be in the range between 2 and 20.
         // to actually restrict we can use slider instead of text field
         TextField("Rows", value: $model.rows, formatter: NumberFormatter())
+          .keyboardType(.numberPad)
           .textFieldStyle(RoundedBorderTextFieldStyle())
           .padding(.horizontal)
         Text("Enter number of columns")
           .padding(.top)
         TextField("Columns", value: $model.columns, formatter: NumberFormatter())
+          .keyboardType(.numberPad)
           .textFieldStyle(RoundedBorderTextFieldStyle())
           .padding(.horizontal)
         NavigationLink("Start Game", destination: destination)
@@ -67,7 +69,7 @@ struct GameView: View {
       Button(action: {
         Task {
           try await model.shuffle()
-            // can add some loader while shuffling
+          // can add some loader while shuffling
         }
       }, label: {
         Text("Shuffle")
@@ -105,20 +107,20 @@ struct GridItemView: View {
 
   var body: some View {
     currentItem
-      .frame(width: 50, height: 50)
+      .frame(width: 40, height: 40)
   }
 
   @ViewBuilder var currentItem: some View {
     switch item {
     case .police:
       ZStack {
-        Color.red.opacity(0.3)
+        Color.orange.opacity(0.3)
         Text("👮‍♂️")
           .font(.title)
       }
     case .ghost:
       ZStack {
-        Color.black.opacity(0.3)
+        Color.red.opacity(0.3)
         Text("👻")
           .font(.title)
       }
@@ -144,8 +146,25 @@ class GameModel: ObservableObject {
   }
 
   func shuffle(withDelay addDelay: Bool = true) async throws {
+    guard addDelay else {
+      let (newPoliceLocation, newGhostLocation) = Self.generateRandomLocations(
+        policeLocation: nil,
+        ghostLocation: nil,
+        rows: rows,
+        columns: columns
+      )
+      await setPoliceLocation(newPoliceLocation)
+      await setGhostLocation(newGhostLocation)
+      return
+    }
     let currentPoliceLocation = await policeLocation
-    let (newPoliceLocation, newGhostLocation) = Self.generateRandomLocations(policeLocation: currentPoliceLocation, rows: rows, columns: columns)
+    let currentGhostLocation = await ghostLocation
+    let (newPoliceLocation, newGhostLocation) = Self.generateRandomLocations(
+      policeLocation: currentPoliceLocation,
+      ghostLocation: currentGhostLocation,
+      rows: rows,
+      columns: columns
+    )
     if addDelay {
       try await Task.sleep(for: .seconds(1))
     }
@@ -165,28 +184,43 @@ class GameModel: ObservableObject {
     ghostLocation = location
   }
 
-  static func generateRandomLocations(policeLocation: Location, rows: Int, columns: Int) -> (police: Location, ghost: Location) {
+  static func generateRandomLocations(policeLocation: Location?, ghostLocation: Location?, rows: Int, columns: Int) -> (police: Location, ghost: Location) {
     guard rows > .zero, columns > .zero else {
-      return (police: .init(row: 0, column: 0),
-              ghost: .init(row: 0, column: 0))
-    }
-    let policeRow = Int.random(in: 0..<rows)
-    let policeColumn = Int.random(in: 0..<columns)
-    let ghostRow = Int.random(in: 0..<rows)
-    let ghostColumn = Int.random(in: 0..<columns)
-
-    // ensure police, ghost are not in same or column
-    guard policeRow != ghostRow, policeColumn != ghostColumn else {
-      return generateRandomLocations(policeLocation: policeLocation, rows: rows, columns: columns)
+      return (police: .zero, ghost: .zero)
     }
 
-    // ensure police has at least changed position, maybe in the future we can ensure both have changed locations
-    guard policeRow != policeLocation.row, policeColumn != policeLocation.column else {
-      return generateRandomLocations(policeLocation: policeLocation, rows: rows, columns: columns)
+    var rowsArray: [Int] = Array<Int>(0..<rows)
+    var columnsArray: [Int] = Array(0..<columns)
+    if let policeLocation {
+      rowsArray.remove(at: policeLocation.row)
+      columnsArray.remove(at: policeLocation.column)
+    }
+    guard let policeRow: Int = rowsArray.randomElement(), let policeColumn: Int = columnsArray.randomElement() else {
+      return (police: .zero, ghost: .zero)
+    }
+    let newPoliceLocation: Location = .init(row: policeRow, column: policeColumn)
+
+    if let policeLocation {
+      rowsArray.insert(policeLocation.row, at: policeLocation.row)
+      columnsArray.insert(policeLocation.column, at: policeLocation.column)
     }
 
-    return (police: .init(row: policeRow, column: policeColumn),
-            ghost: .init(row: ghostRow, column: ghostColumn))
+    rowsArray.remove(at: policeRow)
+    columnsArray.remove(at: policeColumn)
+    if let ghostLocation {
+      if ghostLocation.row != policeRow {
+        rowsArray.removeAll(where: { $0 == ghostLocation.row })
+      }
+      if ghostLocation.column != policeColumn {
+        columnsArray.removeAll(where: { $0 == ghostLocation.column })
+      }
+    }
+    guard let ghostRow: Int = rowsArray.randomElement(), let ghostColumn: Int = columnsArray.randomElement() else {
+      return (police: newPoliceLocation, ghost: .zero)
+    }
+    let newGhostLocation: Location = .init(row: ghostRow, column: ghostColumn)
+    
+    return (police: newPoliceLocation, ghost: newGhostLocation)
   }
 }
 
@@ -194,6 +228,14 @@ extension GameModel {
   struct Location {
     let row: Int
     let column: Int
+
+    static var zero: Location { .init(row: .zero, column: .zero) }
+  }
+}
+
+extension GameModel.Location: Equatable {
+  static func == (lhs: GameModel.Location, rhs: GameModel.Location) -> Bool {
+    lhs.row == rhs.row && lhs.column == rhs.column
   }
 }
 
