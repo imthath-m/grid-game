@@ -1,0 +1,593 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A10BAB322B5ABEF0006295AB /* GridGameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10BAB312B5ABEF0006295AB /* GridGameApp.swift */; };
+		A10BAB342B5ABEF0006295AB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10BAB332B5ABEF0006295AB /* ContentView.swift */; };
+		A10BAB362B5ABEF1006295AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A10BAB352B5ABEF1006295AB /* Assets.xcassets */; };
+		A10BAB392B5ABEF1006295AB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A10BAB382B5ABEF1006295AB /* Preview Assets.xcassets */; };
+		A10BAB432B5ABEF2006295AB /* GridGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10BAB422B5ABEF2006295AB /* GridGameTests.swift */; };
+		A10BAB4D2B5ABEF2006295AB /* GridGameUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10BAB4C2B5ABEF2006295AB /* GridGameUITests.swift */; };
+		A10BAB4F2B5ABEF2006295AB /* GridGameUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10BAB4E2B5ABEF2006295AB /* GridGameUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A10BAB3F2B5ABEF2006295AB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A10BAB262B5ABEF0006295AB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A10BAB2D2B5ABEF0006295AB;
+			remoteInfo = GridGame;
+		};
+		A10BAB492B5ABEF2006295AB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A10BAB262B5ABEF0006295AB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A10BAB2D2B5ABEF0006295AB;
+			remoteInfo = GridGame;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A10BAB2E2B5ABEF0006295AB /* GridGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GridGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A10BAB312B5ABEF0006295AB /* GridGameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridGameApp.swift; sourceTree = "<group>"; };
+		A10BAB332B5ABEF0006295AB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A10BAB352B5ABEF1006295AB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A10BAB382B5ABEF1006295AB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		A10BAB3E2B5ABEF2006295AB /* GridGameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GridGameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A10BAB422B5ABEF2006295AB /* GridGameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridGameTests.swift; sourceTree = "<group>"; };
+		A10BAB482B5ABEF2006295AB /* GridGameUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GridGameUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A10BAB4C2B5ABEF2006295AB /* GridGameUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridGameUITests.swift; sourceTree = "<group>"; };
+		A10BAB4E2B5ABEF2006295AB /* GridGameUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridGameUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A10BAB2B2B5ABEF0006295AB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A10BAB3B2B5ABEF2006295AB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A10BAB452B5ABEF2006295AB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A10BAB252B5ABEF0006295AB = {
+			isa = PBXGroup;
+			children = (
+				A10BAB302B5ABEF0006295AB /* GridGame */,
+				A10BAB412B5ABEF2006295AB /* GridGameTests */,
+				A10BAB4B2B5ABEF2006295AB /* GridGameUITests */,
+				A10BAB2F2B5ABEF0006295AB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A10BAB2F2B5ABEF0006295AB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A10BAB2E2B5ABEF0006295AB /* GridGame.app */,
+				A10BAB3E2B5ABEF2006295AB /* GridGameTests.xctest */,
+				A10BAB482B5ABEF2006295AB /* GridGameUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A10BAB302B5ABEF0006295AB /* GridGame */ = {
+			isa = PBXGroup;
+			children = (
+				A10BAB312B5ABEF0006295AB /* GridGameApp.swift */,
+				A10BAB332B5ABEF0006295AB /* ContentView.swift */,
+				A10BAB352B5ABEF1006295AB /* Assets.xcassets */,
+				A10BAB372B5ABEF1006295AB /* Preview Content */,
+			);
+			path = GridGame;
+			sourceTree = "<group>";
+		};
+		A10BAB372B5ABEF1006295AB /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				A10BAB382B5ABEF1006295AB /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		A10BAB412B5ABEF2006295AB /* GridGameTests */ = {
+			isa = PBXGroup;
+			children = (
+				A10BAB422B5ABEF2006295AB /* GridGameTests.swift */,
+			);
+			path = GridGameTests;
+			sourceTree = "<group>";
+		};
+		A10BAB4B2B5ABEF2006295AB /* GridGameUITests */ = {
+			isa = PBXGroup;
+			children = (
+				A10BAB4C2B5ABEF2006295AB /* GridGameUITests.swift */,
+				A10BAB4E2B5ABEF2006295AB /* GridGameUITestsLaunchTests.swift */,
+			);
+			path = GridGameUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A10BAB2D2B5ABEF0006295AB /* GridGame */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A10BAB522B5ABEF2006295AB /* Build configuration list for PBXNativeTarget "GridGame" */;
+			buildPhases = (
+				A10BAB2A2B5ABEF0006295AB /* Sources */,
+				A10BAB2B2B5ABEF0006295AB /* Frameworks */,
+				A10BAB2C2B5ABEF0006295AB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GridGame;
+			productName = GridGame;
+			productReference = A10BAB2E2B5ABEF0006295AB /* GridGame.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A10BAB3D2B5ABEF2006295AB /* GridGameTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A10BAB552B5ABEF2006295AB /* Build configuration list for PBXNativeTarget "GridGameTests" */;
+			buildPhases = (
+				A10BAB3A2B5ABEF2006295AB /* Sources */,
+				A10BAB3B2B5ABEF2006295AB /* Frameworks */,
+				A10BAB3C2B5ABEF2006295AB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A10BAB402B5ABEF2006295AB /* PBXTargetDependency */,
+			);
+			name = GridGameTests;
+			productName = GridGameTests;
+			productReference = A10BAB3E2B5ABEF2006295AB /* GridGameTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A10BAB472B5ABEF2006295AB /* GridGameUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A10BAB582B5ABEF2006295AB /* Build configuration list for PBXNativeTarget "GridGameUITests" */;
+			buildPhases = (
+				A10BAB442B5ABEF2006295AB /* Sources */,
+				A10BAB452B5ABEF2006295AB /* Frameworks */,
+				A10BAB462B5ABEF2006295AB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A10BAB4A2B5ABEF2006295AB /* PBXTargetDependency */,
+			);
+			name = GridGameUITests;
+			productName = GridGameUITests;
+			productReference = A10BAB482B5ABEF2006295AB /* GridGameUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A10BAB262B5ABEF0006295AB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					A10BAB2D2B5ABEF0006295AB = {
+						CreatedOnToolsVersion = 15.0;
+					};
+					A10BAB3D2B5ABEF2006295AB = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = A10BAB2D2B5ABEF0006295AB;
+					};
+					A10BAB472B5ABEF2006295AB = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = A10BAB2D2B5ABEF0006295AB;
+					};
+				};
+			};
+			buildConfigurationList = A10BAB292B5ABEF0006295AB /* Build configuration list for PBXProject "GridGame" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A10BAB252B5ABEF0006295AB;
+			productRefGroup = A10BAB2F2B5ABEF0006295AB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A10BAB2D2B5ABEF0006295AB /* GridGame */,
+				A10BAB3D2B5ABEF2006295AB /* GridGameTests */,
+				A10BAB472B5ABEF2006295AB /* GridGameUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A10BAB2C2B5ABEF0006295AB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10BAB392B5ABEF1006295AB /* Preview Assets.xcassets in Resources */,
+				A10BAB362B5ABEF1006295AB /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A10BAB3C2B5ABEF2006295AB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A10BAB462B5ABEF2006295AB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A10BAB2A2B5ABEF0006295AB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10BAB342B5ABEF0006295AB /* ContentView.swift in Sources */,
+				A10BAB322B5ABEF0006295AB /* GridGameApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A10BAB3A2B5ABEF2006295AB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10BAB432B5ABEF2006295AB /* GridGameTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A10BAB442B5ABEF2006295AB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10BAB4F2B5ABEF2006295AB /* GridGameUITestsLaunchTests.swift in Sources */,
+				A10BAB4D2B5ABEF2006295AB /* GridGameUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A10BAB402B5ABEF2006295AB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A10BAB2D2B5ABEF0006295AB /* GridGame */;
+			targetProxy = A10BAB3F2B5ABEF2006295AB /* PBXContainerItemProxy */;
+		};
+		A10BAB4A2B5ABEF2006295AB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A10BAB2D2B5ABEF0006295AB /* GridGame */;
+			targetProxy = A10BAB492B5ABEF2006295AB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		A10BAB502B5ABEF2006295AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A10BAB512B5ABEF2006295AB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A10BAB532B5ABEF2006295AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"GridGame/Preview Content\"";
+				DEVELOPMENT_TEAM = 67T577V5Q4;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vaaancorp.GridGame;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A10BAB542B5ABEF2006295AB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"GridGame/Preview Content\"";
+				DEVELOPMENT_TEAM = 67T577V5Q4;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vaaancorp.GridGame;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		A10BAB562B5ABEF2006295AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 67T577V5Q4;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vaaancorp.GridGameTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GridGame.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GridGame";
+			};
+			name = Debug;
+		};
+		A10BAB572B5ABEF2006295AB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 67T577V5Q4;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vaaancorp.GridGameTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GridGame.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GridGame";
+			};
+			name = Release;
+		};
+		A10BAB592B5ABEF2006295AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 67T577V5Q4;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vaaancorp.GridGameUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = GridGame;
+			};
+			name = Debug;
+		};
+		A10BAB5A2B5ABEF2006295AB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 67T577V5Q4;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vaaancorp.GridGameUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = GridGame;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A10BAB292B5ABEF0006295AB /* Build configuration list for PBXProject "GridGame" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A10BAB502B5ABEF2006295AB /* Debug */,
+				A10BAB512B5ABEF2006295AB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A10BAB522B5ABEF2006295AB /* Build configuration list for PBXNativeTarget "GridGame" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A10BAB532B5ABEF2006295AB /* Debug */,
+				A10BAB542B5ABEF2006295AB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A10BAB552B5ABEF2006295AB /* Build configuration list for PBXNativeTarget "GridGameTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A10BAB562B5ABEF2006295AB /* Debug */,
+				A10BAB572B5ABEF2006295AB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A10BAB582B5ABEF2006295AB /* Build configuration list for PBXNativeTarget "GridGameUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A10BAB592B5ABEF2006295AB /* Debug */,
+				A10BAB5A2B5ABEF2006295AB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A10BAB262B5ABEF0006295AB /* Project object */;
+}
