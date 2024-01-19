@@ -26,25 +26,39 @@ struct ContentView: View {
           .keyboardType(.numberPad)
           .textFieldStyle(RoundedBorderTextFieldStyle())
           .padding(.horizontal)
-        NavigationLink("Start Game", destination: destination)
-          .disabled(model.rows == .zero || model.columns == .zero)
-          .padding(.top)
+        Button("Start Game") {
+          model.setSize()
+        }
+        .disabled(!model.isValidSize)
+        .padding(.top)
       }
-    }
-  }
-
-  @ViewBuilder var destination: some View {
-    if model.rows == .zero || model.columns == .zero {
-      Text("Invalid input")
-    } else {
-      GameView(rows: model.rows, columns: model.columns)
+      .navigationDestination(item: $model.size) { size in
+        GameView(rows: size.rows, columns: size.columns)
+      }
     }
   }
 }
 
 class HomeModel: ObservableObject {
+  struct Size: Hashable {
+    let rows: Int
+    let columns: Int
+  }
+  
   @Published var rows: Int = 7
   @Published var columns: Int = 9
+
+  @MainActor @Published var size: Size? = nil
+
+  @MainActor func setSize() {
+    guard isValidSize else { return }
+    size = .init(rows: rows, columns: columns)
+  }
+
+  var isValidSize: Bool {
+    let validRange: ClosedRange<Int> = 2...20
+    return validRange.contains(rows) && validRange.contains(columns)
+  }
 }
 
 struct GameView: View {
