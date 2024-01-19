@@ -43,8 +43,8 @@ struct ContentView: View {
 }
 
 class HomeModel: ObservableObject {
-  @Published var rows: Int = 2
-  @Published var columns: Int = 2
+  @Published var rows: Int = 7
+  @Published var columns: Int = 9
 }
 
 struct GameView: View {
@@ -54,18 +54,28 @@ struct GameView: View {
     self.model = .init(rows: rows, columns: columns)
   }
 
+  private var gridLayout: [GridItem] {
+    Array(repeating: GridItem(.flexible()), count: model.columns)
+  }
+
   var body: some View {
     VStack {
       Text("Police and ghost game")
         .font(.title)
         .padding(.bottom)
-      ForEach(0..<model.rows) { row in
-        HStack {
-          ForEach(0..<model.columns) { column in
-            GridItemView(item: gridItem(atRow: row, andColumn: column))
+
+      ScrollView {
+        ScrollView(.horizontal) {
+          LazyVGrid(columns: gridLayout, spacing: 8) {
+            ForEach(0..<(model.rows * model.columns), id: \.self) { index in
+              let row = index / model.columns
+              let column = index % model.columns
+              GridItemView(item: gridItem(atRow: row, andColumn: column))
+            }
           }
         }
       }
+
       Button(action: {
         Task {
           try await model.shuffle()
@@ -83,7 +93,7 @@ struct GameView: View {
     }
   }
 
-  func gridItem(atRow row: Int, andColumn column: Int) -> GridItem {
+  func gridItem(atRow row: Int, andColumn column: Int) -> Item {
     if row == model.policeLocation.row,
        column == model.policeLocation.column {
       return .police
@@ -96,14 +106,14 @@ struct GameView: View {
   }
 }
 
-enum GridItem {
+enum Item {
   case police
   case ghost
   case empty
 }
 
 struct GridItemView: View {
-  let item: GridItem
+  let item: Item
 
   var body: some View {
     currentItem
