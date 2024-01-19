@@ -56,6 +56,15 @@ struct GameView: View {
           }
         }
       }
+      Button(action: {
+        Task {
+          try await model.shuffle()
+            // can add some loader while shuffling
+        }
+      }, label: {
+        Text("Shuffle")
+      }).disabled(!model.canShuffle)
+        .padding(.top)
     }
   }
 
@@ -114,11 +123,21 @@ class GameModel: ObservableObject {
 
   @Published var policeLocation: Location
   @Published var ghostLocation: Location
+  @Published var canShuffle: Bool = true
 
   init(rows: Int, columns: Int) {
     self.rows = rows
     self.columns = columns
     (policeLocation, ghostLocation) = Self.generateRandomLocations(rows: rows, columns: columns)
+  }
+
+  func shuffle() async throws {
+    let (newPoliceLocation, newGhostLocation) = Self.generateRandomLocations(rows: rows, columns: columns)
+    try await Task.sleep(for: .seconds(1))
+    policeLocation = newPoliceLocation
+    try await Task.sleep(for: .seconds(2))
+    ghostLocation = newGhostLocation
+
   }
 
   static func generateRandomLocations(rows: Int, columns: Int) -> (police: Location, ghost: Location) {
