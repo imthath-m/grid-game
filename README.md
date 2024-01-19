@@ -1,7 +1,7 @@
 #  Grid Game
 
 ### [Start Game Button Demo](https://share.cleanshot.com/Wcp2MgsL)
-This video demonstrates that the start game button is enabled only if both row and columns are greater than zero
+This video demonstrates that the start game button is enabled only if both row and columns are between the desired range
 
 ### [Small Grid Demo - 2x2](https://share.cleanshot.com/C4lTrg29)
 
