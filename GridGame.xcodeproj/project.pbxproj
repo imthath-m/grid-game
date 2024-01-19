@@ -44,6 +44,7 @@
 		A10BAB482B5ABEF2006295AB /* GridGameUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GridGameUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A10BAB4C2B5ABEF2006295AB /* GridGameUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridGameUITests.swift; sourceTree = "<group>"; };
 		A10BAB4E2B5ABEF2006295AB /* GridGameUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridGameUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		A1D6DB392B5AD88500DFB5B1 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +75,7 @@
 		A10BAB252B5ABEF0006295AB = {
 			isa = PBXGroup;
 			children = (
+				A1D6DB392B5AD88500DFB5B1 /* README.md */,
 				A10BAB302B5ABEF0006295AB /* GridGame */,
 				A10BAB412B5ABEF2006295AB /* GridGameTests */,
 				A10BAB4B2B5ABEF2006295AB /* GridGameUITests */,

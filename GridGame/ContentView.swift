@@ -167,6 +167,7 @@ class GameModel: ObservableObject {
       await setGhostLocation(newGhostLocation)
       return
     }
+    await toggleShuffle()
     let currentPoliceLocation = await policeLocation
     let currentGhostLocation = await ghostLocation
     let (newPoliceLocation, newGhostLocation) = Self.generateRandomLocations(
@@ -175,15 +176,11 @@ class GameModel: ObservableObject {
       rows: rows,
       columns: columns
     )
-    if addDelay {
-      try await Task.sleep(for: .seconds(1))
-    }
+    try await Task.sleep(for: .seconds(1))
     await setPoliceLocation(newPoliceLocation)
-    if addDelay {
-      try await Task.sleep(for: .seconds(1))
-    }
+    try await Task.sleep(for: .seconds(1))
     await setGhostLocation(newGhostLocation)
-
+    await toggleShuffle()
   }
 
   @MainActor func setPoliceLocation(_ location: Location) {
@@ -192,6 +189,10 @@ class GameModel: ObservableObject {
 
   @MainActor func setGhostLocation(_ location: Location) {
     ghostLocation = location
+  }
+
+  @MainActor func toggleShuffle() {
+    canShuffle.toggle()
   }
 
   static func generateRandomLocations(policeLocation: Location?, ghostLocation: Location?, rows: Int, columns: Int) -> (police: Location, ghost: Location) {
