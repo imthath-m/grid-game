@@ -24,17 +24,25 @@ struct ContentView: View {
         TextField("Columns", value: $model.columns, formatter: NumberFormatter())
           .textFieldStyle(RoundedBorderTextFieldStyle())
           .padding(.horizontal)
-        NavigationLink("Start Game", destination: GameView(rows: model.rows, columns: model.columns))
+        NavigationLink("Start Game", destination: destination)
           .disabled(model.rows == .zero || model.columns == .zero)
           .padding(.top)
       }
     }
   }
+
+  @ViewBuilder var destination: some View {
+    if model.rows == .zero || model.columns == .zero {
+      Text("Invalid input")
+    } else {
+      GameView(rows: model.rows, columns: model.columns)
+    }
+  }
 }
 
 class HomeModel: ObservableObject {
-  @Published var rows: Int = 0
-  @Published var columns: Int = 0
+  @Published var rows: Int = 2
+  @Published var columns: Int = 2
 }
 
 struct GameView: View {
@@ -65,6 +73,11 @@ struct GameView: View {
         Text("Shuffle")
       }).disabled(!model.canShuffle)
         .padding(.top)
+    }
+    .onAppear {
+      Task {
+        try await model.shuffle(withDelay: false)
+      }
     }
   }
 
@@ -121,35 +134,57 @@ class GameModel: ObservableObject {
   let rows: Int
   let columns: Int
 
-  @Published var policeLocation: Location
-  @Published var ghostLocation: Location
-  @Published var canShuffle: Bool = true
+  @MainActor @Published var policeLocation: Location = .init(row: .zero, column: .zero)
+  @MainActor @Published var ghostLocation: Location = .init(row: .zero, column: .zero)
+  @MainActor @Published var canShuffle: Bool = true
 
   init(rows: Int, columns: Int) {
     self.rows = rows
     self.columns = columns
-    (policeLocation, ghostLocation) = Self.generateRandomLocations(rows: rows, columns: columns)
   }
 
-  func shuffle() async throws {
-    let (newPoliceLocation, newGhostLocation) = Self.generateRandomLocations(rows: rows, columns: columns)
-    try await Task.sleep(for: .seconds(1))
-    policeLocation = newPoliceLocation
-    try await Task.sleep(for: .seconds(2))
-    ghostLocation = newGhostLocation
+  func shuffle(withDelay addDelay: Bool = true) async throws {
+    let currentPoliceLocation = await policeLocation
+    let (newPoliceLocation, newGhostLocation) = Self.generateRandomLocations(policeLocation: currentPoliceLocation, rows: rows, columns: columns)
+    if addDelay {
+      try await Task.sleep(for: .seconds(1))
+    }
+    await setPoliceLocation(newPoliceLocation)
+    if addDelay {
+      try await Task.sleep(for: .seconds(1))
+    }
+    await setGhostLocation(newGhostLocation)
 
   }
 
-  static func generateRandomLocations(rows: Int, columns: Int) -> (police: Location, ghost: Location) {
+  @MainActor func setPoliceLocation(_ location: Location) {
+    policeLocation = location
+  }
+
+  @MainActor func setGhostLocation(_ location: Location) {
+    ghostLocation = location
+  }
+
+  static func generateRandomLocations(policeLocation: Location, rows: Int, columns: Int) -> (police: Location, ghost: Location) {
+    guard rows > .zero, columns > .zero else {
+      return (police: .init(row: 0, column: 0),
+              ghost: .init(row: 0, column: 0))
+    }
     let policeRow = Int.random(in: 0..<rows)
     let policeColumn = Int.random(in: 0..<columns)
     let ghostRow = Int.random(in: 0..<rows)
     let ghostColumn = Int.random(in: 0..<columns)
 
     // ensure police, ghost are not in same or column
-    guard policeRow != ghostRow && policeColumn != ghostColumn else {
-      return generateRandomLocations(rows: rows, columns: columns)
+    guard policeRow != ghostRow, policeColumn != ghostColumn else {
+      return generateRandomLocations(policeLocation: policeLocation, rows: rows, columns: columns)
     }
+
+    // ensure police has at least changed position, maybe in the future we can ensure both have changed locations
+    guard policeRow != policeLocation.row, policeColumn != policeLocation.column else {
+      return generateRandomLocations(policeLocation: policeLocation, rows: rows, columns: columns)
+    }
+
     return (police: .init(row: policeRow, column: policeColumn),
             ghost: .init(row: ghostRow, column: ghostColumn))
   }
