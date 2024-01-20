@@ -23,16 +23,12 @@ struct GameView: View {
       ScrollView {
         ScrollView(.horizontal) {
           gridView
+            .padding()
         }
       }
 
       shuffleButton
         .padding(.top)
-    }
-    .onAppear {
-      Task {
-        try await model.shuffle(withDelay: false)
-      }
     }
   }
 

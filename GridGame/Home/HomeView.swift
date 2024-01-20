@@ -13,28 +13,33 @@ struct HomeView: View {
   var body: some View {
     NavigationStack {
       VStack {
-        Text("Enter number of rows")
-        TextField("Rows", value: $model.rows, formatter: NumberFormatter())
-          .keyboardType(.numberPad)
-          .textFieldStyle(RoundedBorderTextFieldStyle())
-          .padding(.horizontal)
-        Text("Enter number of columns")
-          .padding(.top)
-        TextField("Columns", value: $model.columns, formatter: NumberFormatter())
+        inputs
           .keyboardType(.numberPad)
           .textFieldStyle(RoundedBorderTextFieldStyle())
           .padding(.horizontal)
         // button will be enabled only inputs in the range between 2 and 20.
         // to actually restrict input we can use slider instead of text field
-        Button("Start Game") {
-          model.setSize()
-        }
-        .disabled(!model.isValidSize)
-        .padding(.top)
+        startButton
       }
-      .navigationDestination(item: $model.size) { size in
-        GameView(rows: size.rows, columns: size.columns)
-      }
+    }
+  }
+
+  @ViewBuilder var inputs: some View {
+    Text("Enter number of rows")
+    TextField("Rows", value: $model.rows, formatter: NumberFormatter())
+      .padding(.bottom)
+    Text("Enter number of columns")
+    TextField("Columns", value: $model.columns, formatter: NumberFormatter())
+      .padding(.bottom)
+  }
+
+  var startButton: some View {
+    Button("Start Game") {
+      model.setSize()
+    }
+    .disabled(!model.isValidSize)
+    .navigationDestination(item: $model.size) { size in
+      GameView(rows: size.rows, columns: size.columns)
     }
   }
 }

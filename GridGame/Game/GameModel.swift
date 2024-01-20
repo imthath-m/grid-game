@@ -11,29 +11,25 @@ class GameModel: ObservableObject {
   let rows: Int
   let columns: Int
 
-  @MainActor @Published var policeLocation: Location = .init(row: .zero, column: .zero)
-  @MainActor @Published var ghostLocation: Location = .init(row: .zero, column: .zero)
+  @MainActor @Published var policeLocation: Location
+  @MainActor @Published var ghostLocation: Location
   @MainActor @Published var canShuffle: Bool = true
 
   init(rows: Int, columns: Int) {
     self.rows = rows
     self.columns = columns
+    let (newPoliceLocation, newGhostLocation) = Self.generateRandomLocations(
+      policeLocation: nil,
+      ghostLocation: nil,
+      rows: rows,
+      columns: columns
+    )
+    self._policeLocation = .init(initialValue: newPoliceLocation)
+    self._ghostLocation = .init(initialValue: newGhostLocation)
   }
 
   func shuffle(withDelay addDelay: Bool = true) async throws {
-    guard addDelay else {
-      // setting initial location
-      let (newPoliceLocation, newGhostLocation) = Self.generateRandomLocations(
-        policeLocation: nil,
-        ghostLocation: nil,
-        rows: rows,
-        columns: columns
-      )
-      await setPoliceLocation(newPoliceLocation)
-      await setGhostLocation(newGhostLocation)
-      return
-    }
-    await toggleShuffle()
+    await enableShuffle(false)
     let currentPoliceLocation = await policeLocation
     let currentGhostLocation = await ghostLocation
     let (newPoliceLocation, newGhostLocation) = Self.generateRandomLocations(
@@ -42,11 +38,15 @@ class GameModel: ObservableObject {
       rows: rows,
       columns: columns
     )
-    try await Task.sleep(for: .seconds(1))
+    if addDelay {
+      try await Task.sleep(for: .seconds(1))
+    }
     await setPoliceLocation(newPoliceLocation)
-    try await Task.sleep(for: .seconds(1))
+    if addDelay {
+      try await Task.sleep(for: .seconds(1))
+    }
     await setGhostLocation(newGhostLocation)
-    await toggleShuffle()
+    await enableShuffle(true)
   }
 
   @MainActor private func setPoliceLocation(_ location: Location) {
@@ -57,8 +57,8 @@ class GameModel: ObservableObject {
     ghostLocation = location
   }
 
-  @MainActor private func toggleShuffle() {
-    canShuffle.toggle()
+  @MainActor private func enableShuffle(_ flag: Bool) {
+    canShuffle = flag
   }
 
   private static func generateRandomLocations(policeLocation: Location?,
@@ -70,44 +70,36 @@ class GameModel: ObservableObject {
       return (police: .zero, ghost: .zero)
     }
 
-    // shuffling police location
-    var rowsArray: [Int] = Array<Int>(0..<rows)
-    var columnsArray: [Int] = Array(0..<columns)
+    var cells: Set<Int> = Set<Int>(0..<(rows * columns))
+    // excluding current police location
     if let policeLocation {
-      // excluding current police location
-      rowsArray.remove(at: policeLocation.row)
-      columnsArray.remove(at: policeLocation.column)
+      cells.remove(policeLocation.index)
     }
-    guard let policeRow: Int = rowsArray.randomElement(),
-          let policeColumn: Int = columnsArray.randomElement() else {
+    
+    // shuffling police location
+    guard let newPoliceCell: Int = cells.randomElement() else {
       return (police: .zero, ghost: .zero)
     }
-    let newPoliceLocation: Location = .init(row: policeRow, column: policeColumn)
+    let newPoliceLocation: Location = .init(index: newPoliceCell, columns: columns)
 
     // including removed previous police location
     if let policeLocation {
-      rowsArray.insert(policeLocation.row, at: policeLocation.row)
-      columnsArray.insert(policeLocation.column, at: policeLocation.column)
+      cells.insert(policeLocation.index)
     }
 
-    // excluding new police location
-    rowsArray.remove(at: policeRow)
-    columnsArray.remove(at: policeColumn)
+    // excluding new police location's row and column
+    cells = cells.filter { $0 / columns != newPoliceLocation.row && $0 % columns != newPoliceLocation.column }
 
-    // finding new location of ghost
+    // excluding old ghost location
     if let ghostLocation {
-      if ghostLocation.row != policeRow {
-        rowsArray.removeAll(where: { $0 == ghostLocation.row })
-      }
-      if ghostLocation.column != policeColumn {
-        columnsArray.removeAll(where: { $0 == ghostLocation.column })
-      }
+      cells.remove(ghostLocation.index)
     }
-    guard let ghostRow: Int = rowsArray.randomElement(),
-            let ghostColumn: Int = columnsArray.randomElement() else {
+    
+    // shuffling ghost location
+    guard let newGhostCell: Int = cells.randomElement() else {
       return (police: newPoliceLocation, ghost: .zero)
     }
-    let newGhostLocation: Location = .init(row: ghostRow, column: ghostColumn)
+    let newGhostLocation: Location = .init(index: newGhostCell, columns: columns)
 
     return (police: newPoliceLocation, ghost: newGhostLocation)
   }
@@ -115,10 +107,12 @@ class GameModel: ObservableObject {
 
 extension GameModel {
   struct Location {
-    let row: Int
-    let column: Int
+    let index: Int
+    let columns: Int
+    var row: Int { index / columns }
+    var column: Int { index % columns }
 
-    fileprivate static var zero: Location { .init(row: .zero, column: .zero) }
+    fileprivate static var zero: Location { .init(index: .zero, columns: 1) }
   }
 }
 
