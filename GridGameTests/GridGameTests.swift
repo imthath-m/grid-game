@@ -10,27 +10,48 @@ import XCTest
 
 final class GridGameTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+  override func setUpWithError() throws {
+    // Put setup code here. This method is called before the invocation of each test method in the class.
+  }
+
+  override func tearDownWithError() throws {
+    // Put teardown code here. This method is called after the invocation of each test method in the class.
+  }
+
+  func testShuffle() async throws {
+    for row in 2..<20 {
+      for column in 2..<20 {
+        let model = GameModel(rows: row, columns: column)
+        print("Starting test on grid of size: \(row)x\(column)")
+        let initialPoliceLocation: GameModel.Location = await model.policeLocation
+        let initialGhostLocation: GameModel.Location = await model.ghostLocation
+        print("initial locations", initialPoliceLocation, initialGhostLocation)
+        XCTAssert(initialPoliceLocation.row != initialGhostLocation.row)
+        XCTAssert(initialPoliceLocation.column != initialGhostLocation.column)
+
+        try await model.shuffle(withDelay: false)
+        let newPoliceLocation: GameModel.Location = await model.policeLocation
+        let newGhostLocation: GameModel.Location = await model.ghostLocation
+        print("new locations", newPoliceLocation, newGhostLocation)
+        XCTAssert(newPoliceLocation != initialPoliceLocation)
+        XCTAssert(newGhostLocation != initialGhostLocation)
+        XCTAssert(newPoliceLocation.row != newGhostLocation.row)
+        XCTAssert(newPoliceLocation.column != newGhostLocation.column)
+      }
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+  }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+  func testPerformanceExample() throws {
+    // This is an example of a performance test case.
+    self.measure {
+      // Put the code you want to measure the time of here.
     }
+  }
+}
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
+extension GameModel.Location: CustomDebugStringConvertible {
+  public var debugDescription: String {
+    "(\(row), \(column))"
+  }
 }
